@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import swaggerRouter from '../docs/swagger.routes';
+import authRouter from './auth.routes';
+import usuarioRouter from './usuarios.routes';
 
 const router = Router();
 
@@ -15,9 +17,11 @@ router.get('/health', (_req, res) => {
 // Documentación de la API (Swagger UI)
 router.use('/api-docs', swaggerRouter);
 
-// Nota: Las siguientes rutas se irán conectando secuencialmente conforme se implementen sus casos de uso
-// router.use('/api/auth', authRoutes);
-// router.use('/api/usuarios', usuarioRoutes);
+// Rutas de la API por módulo
+router.use('/api/auth', authRouter);
+router.use('/api/usuarios', usuarioRouter);
+
+// Nota: Las siguientes rutas se irán conectando secuencialmente conforme se implementen sus módulos
 // router.use('/api/productos', productoRoutes);
 // router.use('/api/stock', stockRoutes);
 // router.use('/api/recepciones', recepcionRoutes);

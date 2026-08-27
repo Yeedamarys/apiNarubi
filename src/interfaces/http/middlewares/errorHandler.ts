@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { ZodError } from 'zod';
 
 export class AppError extends Error {
   public readonly statusCode: number;
@@ -23,6 +24,21 @@ export const errorHandler = (
       error: {
         codigo: err.codigo,
         mensaje: err.message,
+      },
+    });
+    return;
+  }
+
+  if (err instanceof ZodError) {
+    const primerDetalle = err.errors[0]?.message || 'Error de validación en los datos ingresados.';
+    res.status(400).json({
+      error: {
+        codigo: 'VALIDATION_ERROR',
+        mensaje: primerDetalle,
+        detalles: err.errors.map((e) => ({
+          campo: e.path.join('.'),
+          mensaje: e.message,
+        })),
       },
     });
     return;
