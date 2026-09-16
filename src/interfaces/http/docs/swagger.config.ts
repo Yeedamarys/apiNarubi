@@ -1,4 +1,5 @@
 import swaggerJSDoc from 'swagger-jsdoc';
+import path from 'path';
 
 const swaggerOptions: swaggerJSDoc.Options = {
   definition: {
@@ -38,12 +39,19 @@ const swaggerOptions: swaggerJSDoc.Options = {
       { name: 'Usuarios', description: 'Gestión de usuarios y asignación de roles' },
       { name: 'Catálogo', description: 'Gestión de productos, categorías y proveedores' },
       { name: 'Stock e Inventario', description: 'Consultas de stock y alertas de inventario mínimo' },
+      { name: 'Kardex y Ajustes', description: 'Movimientos de inventario y ajustes manuales' },
       { name: 'Recepciones', description: 'Registro y consulta de recepción de mercadería (Entradas)' },
       { name: 'Ventas', description: 'Punto de venta y emisión de comprobantes electrónicos (Salidas)' },
-      { name: 'Kardex y Ajustes', description: 'Movimientos de inventario y ajustes manuales' },
     ],
   },
-  apis: ['./src/interfaces/http/routes/*.ts', './src/interfaces/http/docs/swaggerSpec.ts'],
+  apis: [
+    path.join(__dirname, '../../routes/*.ts'),
+    path.join(__dirname, '../../routes/*.js'),
+    path.join(__dirname, './swaggerSpec.ts'),
+    path.join(__dirname, './swaggerSpec.js'),
+    './src/interfaces/http/routes/*.ts',
+    './src/interfaces/http/docs/swaggerSpec.ts',
+  ],
 };
 
 export const swaggerSpec = swaggerJSDoc(swaggerOptions);
