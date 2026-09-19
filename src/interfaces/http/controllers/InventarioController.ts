@@ -12,7 +12,11 @@ const movimientoRepo = new PrismaMovimientoRepository();
 const registrarAjusteUseCase = new RegistrarAjusteInventario(stockRepo, movimientoRepo);
 
 export class InventarioController {
-  public async registrarAjuste(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+  public async registrarAjuste(
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       if (!req.usuario) {
         throw new AppError('Usuario no autenticado.', 401, 'UNAUTHORIZED');

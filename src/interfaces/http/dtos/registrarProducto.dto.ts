@@ -32,17 +32,27 @@ export const registrarProductoSchema = z
   })
   .superRefine((data, ctx) => {
     if (data.tipoVenta === 'PAQUETE') {
-      if (data.unidadesPorPaquete === undefined || data.unidadesPorPaquete === null || data.unidadesPorPaquete <= 0) {
+      if (
+        data.unidadesPorPaquete === undefined ||
+        data.unidadesPorPaquete === null ||
+        data.unidadesPorPaquete <= 0
+      ) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: 'Para productos por PAQUETE, unidadesPorPaquete es obligatorio y debe ser mayor a 0.',
+          message:
+            'Para productos por PAQUETE, unidadesPorPaquete es obligatorio y debe ser mayor a 0.',
           path: ['unidadesPorPaquete'],
         });
       }
-      if (data.precioPaquete === undefined || data.precioPaquete === null || data.precioPaquete < 0) {
+      if (
+        data.precioPaquete === undefined ||
+        data.precioPaquete === null ||
+        data.precioPaquete < 0
+      ) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: 'Para productos por PAQUETE, precioPaquete es obligatorio y no puede ser negativo.',
+          message:
+            'Para productos por PAQUETE, precioPaquete es obligatorio y no puede ser negativo.',
           path: ['precioPaquete'],
         });
       }

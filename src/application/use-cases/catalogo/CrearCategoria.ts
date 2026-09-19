@@ -13,7 +13,11 @@ export class CrearCategoria {
   public async ejecutar(input: CrearCategoriaInput): Promise<Categoria> {
     const existe = await this.categoriaRepo.buscarPorNombre(input.nombre.trim());
     if (existe) {
-      throw new AppError(`Ya existe una categoría registrada con el nombre '${input.nombre}'.`, 400, 'CATEGORIA_DUPLICADA');
+      throw new AppError(
+        `Ya existe una categoría registrada con el nombre '${input.nombre}'.`,
+        400,
+        'CATEGORIA_DUPLICADA'
+      );
     }
 
     const categoria = Categoria.crear({

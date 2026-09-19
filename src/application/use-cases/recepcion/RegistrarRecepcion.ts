@@ -1,5 +1,8 @@
 import { RepositorioRecepcionPort } from '../../ports/RepositorioRecepcionPort';
-import { RecepcionMercaderia, DetalleRecepcionInput } from '../../../domain/entities/RecepcionMercaderia';
+import {
+  RecepcionMercaderia,
+  DetalleRecepcionInput,
+} from '../../../domain/entities/RecepcionMercaderia';
 
 export interface RegistrarRecepcionInput {
   proveedorId: number;

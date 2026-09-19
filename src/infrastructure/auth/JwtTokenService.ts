@@ -21,7 +21,7 @@ export class JwtTokenService implements TokenPort {
 
   public verificar(token: string): PayloadToken {
     try {
-      const decoded = (jwt.verify(token, this.accessSecret) as unknown) as PayloadToken;
+      const decoded = jwt.verify(token, this.accessSecret) as unknown as PayloadToken;
       return decoded;
     } catch {
       throw new AppError('Token de autenticación inválido o expirado.', 401, 'INVALID_TOKEN');

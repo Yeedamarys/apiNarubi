@@ -18,9 +18,15 @@ export class CrearUsuario {
   ) {}
 
   public async ejecutar(input: CrearUsuarioInput): Promise<Usuario> {
-    const existe = await this.usuarioRepo.buscarPorCorreo(input.correoElectronico.trim().toLowerCase());
+    const existe = await this.usuarioRepo.buscarPorCorreo(
+      input.correoElectronico.trim().toLowerCase()
+    );
     if (existe) {
-      throw new AppError('Ya existe un usuario registrado con este correo electrónico.', 400, 'CORREO_DUPLICADO');
+      throw new AppError(
+        'Ya existe un usuario registrado con este correo electrónico.',
+        400,
+        'CORREO_DUPLICADO'
+      );
     }
 
     const passwordHash = await this.hashService.hash(input.contrasena);

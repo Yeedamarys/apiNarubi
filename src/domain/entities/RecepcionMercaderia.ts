@@ -51,9 +51,12 @@ export class RecepcionMercaderia {
       if (!d.productoId || d.productoId <= 0) {
         throw new Error('Cada detalle de recepción debe tener un ID de producto válido.');
       }
-      const tieneCantidad = (d.cantidadPaquetes && d.cantidadPaquetes > 0) || (d.pesoLibras && d.pesoLibras > 0);
+      const tieneCantidad =
+        (d.cantidadPaquetes && d.cantidadPaquetes > 0) || (d.pesoLibras && d.pesoLibras > 0);
       if (!tieneCantidad) {
-        throw new Error('Cada detalle debe especificar cantidad en paquetes (>0) o peso en libras (>0).');
+        throw new Error(
+          'Cada detalle debe especificar cantidad en paquetes (>0) o peso en libras (>0).'
+        );
       }
     }
 

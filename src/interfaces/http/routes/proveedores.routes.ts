@@ -9,6 +9,10 @@ const proveedorController = new ProveedorController();
 proveedorRouter.use(authMiddleware);
 
 proveedorRouter.get('/', proveedorController.listar.bind(proveedorController));
-proveedorRouter.post('/', roleMiddleware(['ADMINISTRADOR']), proveedorController.registrar.bind(proveedorController));
+proveedorRouter.post(
+  '/',
+  roleMiddleware(['ADMINISTRADOR']),
+  proveedorController.registrar.bind(proveedorController)
+);
 
 export default proveedorRouter;

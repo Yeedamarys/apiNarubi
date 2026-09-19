@@ -1,9 +1,16 @@
-import { RepositorioStockPort, StockConDetalle, AlertaStock } from '../../application/ports/RepositorioStockPort';
+import {
+  RepositorioStockPort,
+  StockConDetalle,
+  AlertaStock,
+} from '../../application/ports/RepositorioStockPort';
 import { Stock } from '../../domain/entities/Stock';
 import { prisma } from './prismaClient';
 
 export class PrismaStockRepository implements RepositorioStockPort {
-  public async buscarPorProductoYBodega(productoId: number, bodegaId: number): Promise<Stock | null> {
+  public async buscarPorProductoYBodega(
+    productoId: number,
+    bodegaId: number
+  ): Promise<Stock | null> {
     const raw = await prisma.stock.findUnique({
       where: {
         producto_id_bodega_id: {

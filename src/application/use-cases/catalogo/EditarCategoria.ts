@@ -19,13 +19,19 @@ export class EditarCategoria {
     if (input.nombre && input.nombre.trim().toLowerCase() !== existente.nombre.toLowerCase()) {
       const duplicado = await this.categoriaRepo.buscarPorNombre(input.nombre.trim());
       if (duplicado && duplicado.id !== id) {
-        throw new AppError(`Ya existe otra categoría registrada con el nombre '${input.nombre}'.`, 400, 'CATEGORIA_DUPLICADA');
+        throw new AppError(
+          `Ya existe otra categoría registrada con el nombre '${input.nombre}'.`,
+          400,
+          'CATEGORIA_DUPLICADA'
+        );
       }
     }
 
     const datosActualizacion: Partial<Categoria> = {
       ...(input.nombre && { nombre: input.nombre.trim() }),
-      ...(input.descripcion !== undefined && { descripcion: input.descripcion ? input.descripcion.trim() : null }),
+      ...(input.descripcion !== undefined && {
+        descripcion: input.descripcion ? input.descripcion.trim() : null,
+      }),
     };
 
     return await this.categoriaRepo.actualizar(id, datosActualizacion);

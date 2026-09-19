@@ -13,8 +13,20 @@ productoRouter.get('/', productoController.listar.bind(productoController));
 productoRouter.get('/:id', productoController.obtenerPorId.bind(productoController));
 
 // Rutas de administración: restringidas al rol ADMINISTRADOR
-productoRouter.post('/', roleMiddleware(['ADMINISTRADOR']), productoController.registrar.bind(productoController));
-productoRouter.put('/:id', roleMiddleware(['ADMINISTRADOR']), productoController.editar.bind(productoController));
-productoRouter.patch('/:id/estado', roleMiddleware(['ADMINISTRADOR']), productoController.cambiarEstado.bind(productoController));
+productoRouter.post(
+  '/',
+  roleMiddleware(['ADMINISTRADOR']),
+  productoController.registrar.bind(productoController)
+);
+productoRouter.put(
+  '/:id',
+  roleMiddleware(['ADMINISTRADOR']),
+  productoController.editar.bind(productoController)
+);
+productoRouter.patch(
+  '/:id/estado',
+  roleMiddleware(['ADMINISTRADOR']),
+  productoController.cambiarEstado.bind(productoController)
+);
 
 export default productoRouter;

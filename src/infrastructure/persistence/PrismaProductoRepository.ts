@@ -1,4 +1,8 @@
-import { RepositorioProductoPort, FiltrosProducto, ProductoConDetalle } from '../../application/ports/RepositorioProductoPort';
+import {
+  RepositorioProductoPort,
+  FiltrosProducto,
+  ProductoConDetalle,
+} from '../../application/ports/RepositorioProductoPort';
 import { Producto, TipoVentaProducto } from '../../domain/entities/Producto';
 import { prisma } from './prismaClient';
 import { tipo_venta_enum as PrismaTipoVenta } from '@prisma/client';
@@ -55,9 +59,14 @@ export class PrismaProductoRepository implements RepositorioProductoPort {
     });
   }
 
-  public async guardarConStockInicial(producto: Producto, bodegaIdInicial?: number): Promise<Producto> {
+  public async guardarConStockInicial(
+    producto: Producto,
+    bodegaIdInicial?: number
+  ): Promise<Producto> {
     // 1. Validar existencia de Categoría
-    const categoriaExiste = await prisma.categoria.findUnique({ where: { id: producto.categoriaId } });
+    const categoriaExiste = await prisma.categoria.findUnique({
+      where: { id: producto.categoriaId },
+    });
     if (!categoriaExiste) {
       throw new AppError(
         `No existe ninguna categoría registrada con el ID ${producto.categoriaId}. Por favor, ingresa una categoría válida o créala en /api/categorias.`,
@@ -67,7 +76,9 @@ export class PrismaProductoRepository implements RepositorioProductoPort {
     }
 
     // 2. Validar existencia de Proveedor
-    const proveedorExiste = await prisma.proveedor.findUnique({ where: { id: producto.proveedorId } });
+    const proveedorExiste = await prisma.proveedor.findUnique({
+      where: { id: producto.proveedorId },
+    });
     if (!proveedorExiste) {
       throw new AppError(
         `No existe ningún proveedor registrado con el ID ${producto.proveedorId}. Por favor, ingresa un proveedor válido o créalo en /api/proveedores.`,
@@ -141,7 +152,11 @@ export class PrismaProductoRepository implements RepositorioProductoPort {
       });
     } catch (error: any) {
       if (error.code === 'P2002') {
-        throw new AppError(`El código de barras '${producto.codigoBarras}' ya pertenece a otro producto.`, 400, 'CODIGO_BARRAS_DUPLICADO');
+        throw new AppError(
+          `El código de barras '${producto.codigoBarras}' ya pertenece a otro producto.`,
+          400,
+          'CODIGO_BARRAS_DUPLICADO'
+        );
       }
       throw error;
     }
@@ -192,7 +207,9 @@ export class PrismaProductoRepository implements RepositorioProductoPort {
         ...(datos.categoriaId && { categoria_id: datos.categoriaId }),
         ...(datos.proveedorId && { proveedor_id: datos.proveedorId }),
         ...(datos.tipoVenta && { tipo_venta: datos.tipoVenta as PrismaTipoVenta }),
-        ...(datos.unidadesPorPaquete !== undefined && { unidades_por_paquete: datos.unidadesPorPaquete }),
+        ...(datos.unidadesPorPaquete !== undefined && {
+          unidades_por_paquete: datos.unidadesPorPaquete,
+        }),
         ...(datos.precioPaquete !== undefined && { precio_paquete: datos.precioPaquete }),
         ...(datos.precioLibra !== undefined && { precio_libra: datos.precioLibra }),
         ...(datos.precioMayorista !== undefined && { precio_mayorista: datos.precioMayorista }),

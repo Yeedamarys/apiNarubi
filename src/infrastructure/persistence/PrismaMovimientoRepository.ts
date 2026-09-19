@@ -1,4 +1,7 @@
-import { RepositorioMovimientoPort, MovimientoKardexDetalle } from '../../application/ports/RepositorioMovimientoPort';
+import {
+  RepositorioMovimientoPort,
+  MovimientoKardexDetalle,
+} from '../../application/ports/RepositorioMovimientoPort';
 import { MovimientoInventario } from '../../domain/entities/MovimientoInventario';
 import { prisma } from './prismaClient';
 import {
@@ -35,7 +38,10 @@ export class PrismaMovimientoRepository implements RepositorioMovimientoPort {
     });
   }
 
-  public async listarPorProducto(productoId: number, bodegaId?: number): Promise<MovimientoKardexDetalle[]> {
+  public async listarPorProducto(
+    productoId: number,
+    bodegaId?: number
+  ): Promise<MovimientoKardexDetalle[]> {
     const raws = await prisma.movimiento_inventario.findMany({
       where: {
         producto_id: productoId,

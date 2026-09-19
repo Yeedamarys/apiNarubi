@@ -24,10 +24,19 @@ export class EditarUsuario {
       throw new AppError(`No se encontró ningún usuario con el ID ${id}.`, 404, 'NOT_FOUND');
     }
 
-    if (input.correoElectronico && input.correoElectronico.trim().toLowerCase() !== usuarioExistente.correoElectronico) {
-      const otroConMismoCorreo = await this.usuarioRepo.buscarPorCorreo(input.correoElectronico.trim().toLowerCase());
+    if (
+      input.correoElectronico &&
+      input.correoElectronico.trim().toLowerCase() !== usuarioExistente.correoElectronico
+    ) {
+      const otroConMismoCorreo = await this.usuarioRepo.buscarPorCorreo(
+        input.correoElectronico.trim().toLowerCase()
+      );
       if (otroConMismoCorreo && otroConMismoCorreo.id !== id) {
-        throw new AppError('El correo electrónico ingresado ya pertenece a otro usuario.', 400, 'CORREO_DUPLICADO');
+        throw new AppError(
+          'El correo electrónico ingresado ya pertenece a otro usuario.',
+          400,
+          'CORREO_DUPLICADO'
+        );
       }
     }
 
@@ -38,7 +47,9 @@ export class EditarUsuario {
 
     const datosActualizacion: Partial<Usuario> = {
       ...(input.nombreCompleto && { nombreCompleto: input.nombreCompleto.trim() }),
-      ...(input.correoElectronico && { correoElectronico: input.correoElectronico.trim().toLowerCase() }),
+      ...(input.correoElectronico && {
+        correoElectronico: input.correoElectronico.trim().toLowerCase(),
+      }),
       ...(passwordHashNuevo && { passwordHash: passwordHashNuevo }),
       ...(input.rol && { rol: input.rol }),
       ...(input.activo !== undefined && { activo: input.activo }),

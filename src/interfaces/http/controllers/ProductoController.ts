@@ -31,8 +31,12 @@ export class ProductoController {
 
   public async listar(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const categoriaId = req.query.categoriaId ? parseInt(req.query.categoriaId as string, 10) : undefined;
-      const proveedorId = req.query.proveedorId ? parseInt(req.query.proveedorId as string, 10) : undefined;
+      const categoriaId = req.query.categoriaId
+        ? parseInt(req.query.categoriaId as string, 10)
+        : undefined;
+      const proveedorId = req.query.proveedorId
+        ? parseInt(req.query.proveedorId as string, 10)
+        : undefined;
       const tipoVenta = req.query.tipoVenta as string | undefined;
       const activo = req.query.activo !== undefined ? req.query.activo === 'true' : undefined;
 
@@ -79,7 +83,9 @@ export class ProductoController {
     try {
       const id = parseInt(req.params.id, 10);
       const { activo } = req.body;
-      const productoActualizado = await editarProductoUseCase.ejecutar(id, { activo: Boolean(activo) });
+      const productoActualizado = await editarProductoUseCase.ejecutar(id, {
+        activo: Boolean(activo),
+      });
 
       res.status(200).json({
         mensaje: `Estado del producto actualizado a ${activo ? 'ACTIVO' : 'INACTIVO'}.`,

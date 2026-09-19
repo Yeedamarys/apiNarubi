@@ -27,9 +27,15 @@ export class AutenticarUsuario {
   ) {}
 
   public async ejecutar(input: AuthInput): Promise<AuthOutput> {
-    const errorGenerico = new AppError('Credenciales incorrectas o usuario inactivo.', 401, 'INVALID_CREDENTIALS');
+    const errorGenerico = new AppError(
+      'Credenciales incorrectas o usuario inactivo.',
+      401,
+      'INVALID_CREDENTIALS'
+    );
 
-    const usuario = await this.usuarioRepo.buscarPorCorreo(input.correoElectronico.trim().toLowerCase());
+    const usuario = await this.usuarioRepo.buscarPorCorreo(
+      input.correoElectronico.trim().toLowerCase()
+    );
     if (!usuario || !usuario.activo) {
       throw errorGenerico;
     }

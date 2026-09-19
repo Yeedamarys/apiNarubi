@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const KardexController_1 = require("../controllers/KardexController");
+const authMiddleware_1 = require("../middlewares/authMiddleware");
+const roleMiddleware_1 = require("../middlewares/roleMiddleware");
+const kardexRouter = (0, express_1.Router)();
+const kardexController = new KardexController_1.KardexController();
+kardexRouter.use(authMiddleware_1.authMiddleware);
+kardexRouter.use((0, roleMiddleware_1.roleMiddleware)(['ADMINISTRADOR', 'BODEGA']));
+kardexRouter.get('/:productoId', kardexController.consultarPorProducto.bind(kardexController));
+exports.default = kardexRouter;

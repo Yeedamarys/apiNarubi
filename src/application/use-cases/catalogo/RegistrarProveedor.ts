@@ -16,7 +16,11 @@ export class RegistrarProveedor {
   public async ejecutar(input: RegistrarProveedorInput): Promise<Proveedor> {
     const existeRuc = await this.proveedorRepo.buscarPorRuc(input.ruc.trim());
     if (existeRuc) {
-      throw new AppError(`Ya existe un proveedor registrado con el RUC '${input.ruc}'.`, 400, 'RUC_DUPLICADO');
+      throw new AppError(
+        `Ya existe un proveedor registrado con el RUC '${input.ruc}'.`,
+        400,
+        'RUC_DUPLICADO'
+      );
     }
 
     const proveedor = Proveedor.crear({

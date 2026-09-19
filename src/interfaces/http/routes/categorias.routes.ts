@@ -14,8 +14,20 @@ categoriaRouter.get('/', categoriaController.listar.bind(categoriaController));
 categoriaRouter.get('/:id', categoriaController.obtenerPorId.bind(categoriaController));
 
 // Rutas de modificación: restringidas al rol ADMINISTRADOR
-categoriaRouter.post('/', roleMiddleware(['ADMINISTRADOR']), categoriaController.crear.bind(categoriaController));
-categoriaRouter.put('/:id', roleMiddleware(['ADMINISTRADOR']), categoriaController.editar.bind(categoriaController));
-categoriaRouter.delete('/:id', roleMiddleware(['ADMINISTRADOR']), categoriaController.eliminar.bind(categoriaController));
+categoriaRouter.post(
+  '/',
+  roleMiddleware(['ADMINISTRADOR']),
+  categoriaController.crear.bind(categoriaController)
+);
+categoriaRouter.put(
+  '/:id',
+  roleMiddleware(['ADMINISTRADOR']),
+  categoriaController.editar.bind(categoriaController)
+);
+categoriaRouter.delete(
+  '/:id',
+  roleMiddleware(['ADMINISTRADOR']),
+  categoriaController.eliminar.bind(categoriaController)
+);
 
 export default categoriaRouter;

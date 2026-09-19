@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const InventarioController_1 = require("../controllers/InventarioController");
+const authMiddleware_1 = require("../middlewares/authMiddleware");
+const roleMiddleware_1 = require("../middlewares/roleMiddleware");
+const inventarioRouter = (0, express_1.Router)();
+const inventarioController = new InventarioController_1.InventarioController();
+inventarioRouter.use(authMiddleware_1.authMiddleware);
+inventarioRouter.use((0, roleMiddleware_1.roleMiddleware)(['ADMINISTRADOR']));
+inventarioRouter.post('/ajustes', inventarioController.registrarAjuste.bind(inventarioController));
+exports.default = inventarioRouter;

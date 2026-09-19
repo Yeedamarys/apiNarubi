@@ -12,7 +12,11 @@ const registrarRecepcionUseCase = new RegistrarRecepcion(recepcionRepo);
 const listarRecepcionesUseCase = new ListarRecepciones(recepcionRepo);
 
 export class RecepcionController {
-  public async registrar(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+  public async registrar(
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       if (!req.usuario) {
         throw new AppError('Usuario no autenticado.', 401, 'UNAUTHORIZED');
@@ -29,7 +33,8 @@ export class RecepcionController {
       });
 
       res.status(201).json({
-        mensaje: 'Recepción de mercadería registrada exitosamente y stock incrementado en PostgreSQL.',
+        mensaje:
+          'Recepción de mercadería registrada exitosamente y stock incrementado en PostgreSQL.',
         recepcion: nuevaRecepcion,
       });
     } catch (error) {
@@ -37,7 +42,11 @@ export class RecepcionController {
     }
   }
 
-  public async listar(_req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+  public async listar(
+    _req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       const recepciones = await listarRecepcionesUseCase.ejecutar();
       res.status(200).json(recepciones);

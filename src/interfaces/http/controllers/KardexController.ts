@@ -6,10 +6,16 @@ const movimientoRepo = new PrismaMovimientoRepository();
 const consultarKardexUseCase = new ConsultarKardex(movimientoRepo);
 
 export class KardexController {
-  public async consultarPorProducto(req: Request, res: Response, next: NextFunction): Promise<void> {
+  public async consultarPorProducto(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       const productoId = parseInt(req.params.productoId, 10);
-      const bodegaIdQuery = req.query.bodegaId ? parseInt(req.query.bodegaId as string, 10) : undefined;
+      const bodegaIdQuery = req.query.bodegaId
+        ? parseInt(req.query.bodegaId as string, 10)
+        : undefined;
 
       const movimientos = await consultarKardexUseCase.ejecutar(productoId, bodegaIdQuery);
 

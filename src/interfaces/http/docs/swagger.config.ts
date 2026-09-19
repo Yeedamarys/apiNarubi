@@ -38,10 +38,19 @@ const swaggerOptions: swaggerJSDoc.Options = {
       { name: 'Autenticación', description: 'Endpoints para inicio de sesión y gestión de tokens' },
       { name: 'Usuarios', description: 'Gestión de usuarios y asignación de roles' },
       { name: 'Catálogo', description: 'Gestión de productos, categorías y proveedores' },
-      { name: 'Stock e Inventario', description: 'Consultas de stock y alertas de inventario mínimo' },
+      {
+        name: 'Stock e Inventario',
+        description: 'Consultas de stock y alertas de inventario mínimo',
+      },
       { name: 'Kardex y Ajustes', description: 'Movimientos de inventario y ajustes manuales' },
-      { name: 'Recepciones', description: 'Registro y consulta de recepción de mercadería (Entradas)' },
-      { name: 'Ventas', description: 'Punto de venta y emisión de comprobantes electrónicos (Salidas)' },
+      {
+        name: 'Recepciones',
+        description: 'Registro y consulta de recepción de mercadería (Entradas)',
+      },
+      {
+        name: 'Ventas',
+        description: 'Punto de venta y emisión de comprobantes electrónicos (Salidas)',
+      },
     ],
   },
   apis: [

@@ -11,7 +11,9 @@ const consultarAlertasStockUseCase = new ConsultarAlertasStock(stockRepo);
 export class StockController {
   public async listar(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const bodegaIdQuery = req.query.bodegaId ? parseInt(req.query.bodegaId as string, 10) : undefined;
+      const bodegaIdQuery = req.query.bodegaId
+        ? parseInt(req.query.bodegaId as string, 10)
+        : undefined;
       const stock = await consultarStockUseCase.ejecutar(bodegaIdQuery);
 
       res.status(200).json(stock);

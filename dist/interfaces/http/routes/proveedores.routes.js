@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const ProveedorController_1 = require("../controllers/ProveedorController");
+const authMiddleware_1 = require("../middlewares/authMiddleware");
+const roleMiddleware_1 = require("../middlewares/roleMiddleware");
+const proveedorRouter = (0, express_1.Router)();
+const proveedorController = new ProveedorController_1.ProveedorController();
+proveedorRouter.use(authMiddleware_1.authMiddleware);
+proveedorRouter.get('/', proveedorController.listar.bind(proveedorController));
+proveedorRouter.post('/', (0, roleMiddleware_1.roleMiddleware)(['ADMINISTRADOR']), proveedorController.registrar.bind(proveedorController));
+exports.default = proveedorRouter;

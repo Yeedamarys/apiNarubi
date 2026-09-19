@@ -8,7 +8,15 @@ const recepcionController = new RecepcionController();
 
 recepcionRouter.use(authMiddleware);
 
-recepcionRouter.get('/', roleMiddleware(['ADMINISTRADOR', 'BODEGA']), recepcionController.listar.bind(recepcionController));
-recepcionRouter.post('/', roleMiddleware(['ADMINISTRADOR', 'BODEGA']), recepcionController.registrar.bind(recepcionController));
+recepcionRouter.get(
+  '/',
+  roleMiddleware(['ADMINISTRADOR', 'BODEGA']),
+  recepcionController.listar.bind(recepcionController)
+);
+recepcionRouter.post(
+  '/',
+  roleMiddleware(['ADMINISTRADOR', 'BODEGA']),
+  recepcionController.registrar.bind(recepcionController)
+);
 
 export default recepcionRouter;

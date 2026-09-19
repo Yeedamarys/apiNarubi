@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const RecepcionController_1 = require("../controllers/RecepcionController");
+const authMiddleware_1 = require("../middlewares/authMiddleware");
+const roleMiddleware_1 = require("../middlewares/roleMiddleware");
+const recepcionRouter = (0, express_1.Router)();
+const recepcionController = new RecepcionController_1.RecepcionController();
+recepcionRouter.use(authMiddleware_1.authMiddleware);
+recepcionRouter.get('/', (0, roleMiddleware_1.roleMiddleware)(['ADMINISTRADOR', 'BODEGA']), recepcionController.listar.bind(recepcionController));
+recepcionRouter.post('/', (0, roleMiddleware_1.roleMiddleware)(['ADMINISTRADOR', 'BODEGA']), recepcionController.registrar.bind(recepcionController));
+exports.default = recepcionRouter;

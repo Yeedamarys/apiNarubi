@@ -1,4 +1,7 @@
-import { RepositorioMovimientoPort, MovimientoKardexDetalle } from '../../ports/RepositorioMovimientoPort';
+import {
+  RepositorioMovimientoPort,
+  MovimientoKardexDetalle,
+} from '../../ports/RepositorioMovimientoPort';
 import { AppError } from '../../../interfaces/http/middlewares/errorHandler';
 
 export class ConsultarKardex {

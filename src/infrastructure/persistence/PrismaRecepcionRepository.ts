@@ -1,4 +1,7 @@
-import { RepositorioRecepcionPort, RecepcionConDetalle } from '../../application/ports/RepositorioRecepcionPort';
+import {
+  RepositorioRecepcionPort,
+  RecepcionConDetalle,
+} from '../../application/ports/RepositorioRecepcionPort';
 import { RecepcionMercaderia } from '../../domain/entities/RecepcionMercaderia';
 import { prisma } from './prismaClient';
 
@@ -28,7 +31,9 @@ export class PrismaRecepcionRepository implements RepositorioRecepcionPort {
           },
         });
 
-        const cantidadSumar = item.cantidadPaquetes ? item.cantidadPaquetes : Number(item.pesoLibras || 0);
+        const cantidadSumar = item.cantidadPaquetes
+          ? item.cantidadPaquetes
+          : Number(item.pesoLibras || 0);
 
         // Incrementar stock en PostgreSQL
         await tx.stock.upsert({

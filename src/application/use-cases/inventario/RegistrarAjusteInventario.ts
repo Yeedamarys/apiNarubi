@@ -18,16 +18,25 @@ export class RegistrarAjusteInventario {
     private readonly movimientoRepo: RepositorioMovimientoPort
   ) {}
 
-  public async ejecutar(input: RegistrarAjusteInput): Promise<{ stockActualizado: Stock; movimiento: MovimientoInventario }> {
+  public async ejecutar(
+    input: RegistrarAjusteInput
+  ): Promise<{ stockActualizado: Stock; movimiento: MovimientoInventario }> {
     if (!input.motivo || input.motivo.trim().length === 0) {
-      throw new AppError('El motivo del ajuste de inventario es obligatorio.', 400, 'MOTIVO_REQUERIDO');
+      throw new AppError(
+        'El motivo del ajuste de inventario es obligatorio.',
+        400,
+        'MOTIVO_REQUERIDO'
+      );
     }
 
     if (input.cantidad === 0) {
       throw new AppError('La cantidad del ajuste no puede ser cero.', 400, 'CANTIDAD_INVALIDA');
     }
 
-    const stockActual = await this.stockRepo.buscarPorProductoYBodega(input.productoId, input.bodegaId);
+    const stockActual = await this.stockRepo.buscarPorProductoYBodega(
+      input.productoId,
+      input.bodegaId
+    );
     const cantidadPrevia = stockActual ? stockActual.cantidadDisponible : 0;
     const nuevaCantidad = cantidadPrevia + input.cantidad;
 

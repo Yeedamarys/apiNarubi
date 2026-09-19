@@ -69,17 +69,29 @@ export class Producto {
 
     if (props.tipoVenta === 'PAQUETE') {
       if (!props.unidadesPorPaquete || props.unidadesPorPaquete <= 0) {
-        throw new Error('Para productos por PAQUETE, las unidades por paquete son obligatorias y deben ser mayores a 0.');
+        throw new Error(
+          'Para productos por PAQUETE, las unidades por paquete son obligatorias y deben ser mayores a 0.'
+        );
       }
-      if (props.precioPaquete === undefined || props.precioPaquete === null || props.precioPaquete < 0) {
-        throw new Error('Para productos por PAQUETE, el precio por paquete es obligatorio y no puede ser negativo.');
+      if (
+        props.precioPaquete === undefined ||
+        props.precioPaquete === null ||
+        props.precioPaquete < 0
+      ) {
+        throw new Error(
+          'Para productos por PAQUETE, el precio por paquete es obligatorio y no puede ser negativo.'
+        );
       }
     } else if (props.tipoVenta === 'PESO') {
       if (props.precioLibra === undefined || props.precioLibra === null || props.precioLibra < 0) {
-        throw new Error('Para productos por PESO, el precio por libra es obligatorio y no puede ser negativo.');
+        throw new Error(
+          'Para productos por PESO, el precio por libra es obligatorio y no puede ser negativo.'
+        );
       }
     } else {
-      throw new Error(`El tipo de venta '${props.tipoVenta}' no es válido. Debe ser PAQUETE o PESO.`);
+      throw new Error(
+        `El tipo de venta '${props.tipoVenta}' no es válido. Debe ser PAQUETE o PESO.`
+      );
     }
 
     return new Producto({

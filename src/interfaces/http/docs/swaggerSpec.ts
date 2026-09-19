@@ -8,7 +8,7 @@
  *     responses:
  *       200:
  *         description: Servidor en ejecución
- * 
+ *
  * /api/auth/login:
  *   post:
  *     summary: Autenticar usuario (Login)
@@ -32,7 +32,7 @@
  *     responses:
  *       200:
  *         description: Autenticación exitosa y devolución de tokens JWT
- * 
+ *
  * /api/auth/me:
  *   get:
  *     summary: Obtener perfil del usuario autenticado
@@ -42,7 +42,7 @@
  *     responses:
  *       200:
  *         description: Datos del usuario autenticado extraídos del token JWT
- * 
+ *
  * /api/usuarios:
  *   get:
  *     summary: Listar todos los usuarios registrados
@@ -82,7 +82,7 @@
  *     responses:
  *       201:
  *         description: Usuario registrado exitosamente
- * 
+ *
  * /api/usuarios/{id}:
  *   get:
  *     summary: Obtener información detallada de un usuario por ID
@@ -126,7 +126,7 @@
  *     responses:
  *       200:
  *         description: Usuario eliminado permanentemente
- * 
+ *
  * /api/usuarios/{id}/estado:
  *   patch:
  *     summary: Cambiar estado del usuario (Activar / Inactivar)
@@ -142,7 +142,7 @@
  *     responses:
  *       200:
  *         description: Estado actualizado
- * 
+ *
  * /api/categorias:
  *   get:
  *     summary: Listar todas las categorías
@@ -174,7 +174,7 @@
  *     responses:
  *       201:
  *         description: Categoría registrada
- * 
+ *
  * /api/categorias/{id}:
  *   get:
  *     summary: Obtener categoría por ID
@@ -218,7 +218,7 @@
  *     responses:
  *       200:
  *         description: Categoría eliminada
- * 
+ *
  * /api/proveedores:
  *   get:
  *     summary: Listar proveedores registrados
@@ -259,7 +259,7 @@
  *     responses:
  *       201:
  *         description: Proveedor registrado exitosamente
- * 
+ *
  * /api/productos:
  *   get:
  *     summary: Listar catálogo de productos (con filtros por categoría, proveedor, tipo de venta y estado)
@@ -340,7 +340,7 @@
  *     responses:
  *       201:
  *         description: Producto registrado exitosamente en PostgreSQL y stock inicializado en 0
- * 
+ *
  * /api/productos/{id}:
  *   get:
  *     summary: Obtener producto por ID
@@ -370,7 +370,7 @@
  *     responses:
  *       200:
  *         description: Producto actualizado
- * 
+ *
  * /api/productos/{id}/estado:
  *   patch:
  *     summary: Activar / Inactivar un producto
@@ -397,7 +397,7 @@
  *     responses:
  *       200:
  *         description: Estado del producto actualizado
- * 
+ *
  * /api/stock:
  *   get:
  *     summary: Consultar niveles de stock por bodega (con unidad de medida calculada)
@@ -413,7 +413,7 @@
  *     responses:
  *       200:
  *         description: Niveles de stock formateados con unidad de medida (paquetes o libras)
- * 
+ *
  * /api/stock/alertas:
  *   get:
  *     summary: Consultar productos en alerta de stock mínimo
@@ -423,7 +423,7 @@
  *     responses:
  *       200:
  *         description: Productos con cantidad disponible igual o menor al stock mínimo
- * 
+ *
  * /api/kardex/{productoId}:
  *   get:
  *     summary: Consultar movimientos del Kardex por producto (Cronológico)
@@ -439,7 +439,7 @@
  *     responses:
  *       200:
  *         description: Historial de movimientos de inventario
- * 
+ *
  * /api/inventario/ajustes:
  *   post:
  *     summary: Registrar un ajuste manual de inventario (+ / -)
@@ -469,7 +469,7 @@
  *     responses:
  *       201:
  *         description: Ajuste registrado exitosamente
- * 
+ *
  * /api/recepciones:
  *   get:
  *     summary: Listar historial de recepción de mercadería (Entradas)
@@ -519,7 +519,7 @@
  *     responses:
  *       201:
  *         description: Recepción registrada exitosamente, stock incrementado en PostgreSQL y Kardex actualizado
- * 
+ *
  * /api/ventas:
  *   get:
  *     summary: Listar historial de ventas registradas en el POS
@@ -570,7 +570,7 @@
  *     responses:
  *       201:
  *         description: Venta registrada exitosamente, stock decrementado, comprobante SRI de 49 dígitos generado y Kardex actualizado
- * 
+ *
  * /api/ventas/{id}:
  *   get:
  *     summary: Obtener detalle completo de una venta e información del comprobante SRI por ID
@@ -586,7 +586,7 @@
  *     responses:
  *       200:
  *         description: Venta y comprobante encontrados
- * 
+ *
  * /api/ventas/{id}/anular:
  *   patch:
  *     summary: Anular una venta (reinvierte el stock a la bodega e inserta movimiento en Kardex)

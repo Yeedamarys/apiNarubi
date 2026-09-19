@@ -9,7 +9,15 @@ const stockController = new StockController();
 stockRouter.use(authMiddleware);
 
 // Rutas de stock
-stockRouter.get('/alertas', roleMiddleware(['ADMINISTRADOR', 'BODEGA']), stockController.listarAlertas.bind(stockController));
-stockRouter.get('/', roleMiddleware(['ADMINISTRADOR', 'PUNTO_VENTA', 'BODEGA']), stockController.listar.bind(stockController));
+stockRouter.get(
+  '/alertas',
+  roleMiddleware(['ADMINISTRADOR', 'BODEGA']),
+  stockController.listarAlertas.bind(stockController)
+);
+stockRouter.get(
+  '/',
+  roleMiddleware(['ADMINISTRADOR', 'PUNTO_VENTA', 'BODEGA']),
+  stockController.listar.bind(stockController)
+);
 
 export default stockRouter;

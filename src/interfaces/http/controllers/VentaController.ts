@@ -16,7 +16,11 @@ const listarVentasUseCase = new ListarVentas(ventaRepo);
 const anularVentaUseCase = new AnularVenta(ventaRepo);
 
 export class VentaController {
-  public async registrar(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+  public async registrar(
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       if (!req.usuario) {
         throw new AppError('Usuario no autenticado.', 401, 'UNAUTHORIZED');
@@ -33,7 +37,8 @@ export class VentaController {
       });
 
       res.status(201).json({
-        mensaje: 'Venta registrada exitosamente, stock actualizado y comprobante electrónico SRI generado.',
+        mensaje:
+          'Venta registrada exitosamente, stock actualizado y comprobante electrónico SRI generado.',
         venta: nuevaVenta,
       });
     } catch (error) {
@@ -41,7 +46,11 @@ export class VentaController {
     }
   }
 
-  public async listar(_req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+  public async listar(
+    _req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       const ventas = await listarVentasUseCase.ejecutar();
       res.status(200).json(ventas);
@@ -50,7 +59,11 @@ export class VentaController {
     }
   }
 
-  public async obtenerPorId(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
+  public async obtenerPorId(
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       const id = parseInt(req.params.id, 10);
       const venta = await ventaRepo.buscarPorId(id);

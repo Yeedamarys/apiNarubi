@@ -1,4 +1,8 @@
-import { RepositorioProductoPort, FiltrosProducto, ProductoConDetalle } from '../../ports/RepositorioProductoPort';
+import {
+  RepositorioProductoPort,
+  FiltrosProducto,
+  ProductoConDetalle,
+} from '../../ports/RepositorioProductoPort';
 
 export class ListarProductos {
   constructor(private readonly productoRepo: RepositorioProductoPort) {}

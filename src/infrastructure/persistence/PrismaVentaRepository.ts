@@ -1,4 +1,7 @@
-import { RepositorioVentaPort, VentaConDetalle } from '../../application/ports/RepositorioVentaPort';
+import {
+  RepositorioVentaPort,
+  VentaConDetalle,
+} from '../../application/ports/RepositorioVentaPort';
 import { Venta } from '../../domain/entities/Venta';
 import { prisma } from './prismaClient';
 import { modalidad_venta_enum as PrismaModalidadVenta } from '@prisma/client';
@@ -26,7 +29,9 @@ export class PrismaVentaRepository implements RepositorioVentaPort {
 
       // 2. Procesar ítems y descontar stock transaccionalmente
       for (const item of venta.detalles) {
-        const cantidad = item.cantidadPaquetes ? item.cantidadPaquetes : Number(item.pesoLibras || 0);
+        const cantidad = item.cantidadPaquetes
+          ? item.cantidadPaquetes
+          : Number(item.pesoLibras || 0);
         const itemSubtotal = Number((item.precioAplicado * cantidad).toFixed(2));
 
         const rawDetalle = await tx.detalle_venta.create({
@@ -137,7 +142,9 @@ export class PrismaVentaRepository implements RepositorioVentaPort {
 
       // Revertir el stock de cada producto
       for (const item of rawVenta.detalle_venta) {
-        const cantidad = item.cantidad_paquetes ? item.cantidad_paquetes : Number(item.peso_libras || 0);
+        const cantidad = item.cantidad_paquetes
+          ? item.cantidad_paquetes
+          : Number(item.peso_libras || 0);
 
         await tx.stock.update({
           where: {

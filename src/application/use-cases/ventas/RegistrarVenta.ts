@@ -24,12 +24,21 @@ export class RegistrarVenta {
 
     // 1. Validar disponibilidad de stock por producto (RF-22)
     for (const item of input.detalles) {
-      const cantidadSolicitada = item.cantidadPaquetes ? item.cantidadPaquetes : Number(item.pesoLibras || 0);
+      const cantidadSolicitada = item.cantidadPaquetes
+        ? item.cantidadPaquetes
+        : Number(item.pesoLibras || 0);
       if (cantidadSolicitada <= 0) {
-        throw new AppError('La cantidad solicitada debe ser mayor a cero.', 400, 'CANTIDAD_INVALIDA');
+        throw new AppError(
+          'La cantidad solicitada debe ser mayor a cero.',
+          400,
+          'CANTIDAD_INVALIDA'
+        );
       }
 
-      const stockActual = await this.stockRepo.buscarPorProductoYBodega(item.productoId, input.bodegaId);
+      const stockActual = await this.stockRepo.buscarPorProductoYBodega(
+        item.productoId,
+        input.bodegaId
+      );
       const disponible = stockActual ? stockActual.cantidadDisponible : 0;
 
       if (disponible < cantidadSolicitada) {
